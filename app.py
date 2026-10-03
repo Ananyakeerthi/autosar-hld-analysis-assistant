@@ -29,6 +29,15 @@ import numpy as np
 import faiss
 import requests
 from sentence_transformers import SentenceTransformer
+import pytesseract
+from PIL import Image
+import io
+
+# Point to the Tesseract OCR engine install (adjust if installed elsewhere).
+# Only used as a fallback for scanned/image-only PDF pages.
+_TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+if os.path.exists(_TESSERACT_PATH):
+    pytesseract.pytesseract.tesseract_cmd = _TESSERACT_PATH
 
 # ----------------------------------------------------------------------------
 # Page config
@@ -56,15 +65,32 @@ def get_embedding_model():
     return SentenceTransformer("all-MiniLM-L6-v2")
 
 
-def extract_pages(pdf_path):
-    """Extract text from each page of the PDF, keeping page numbers for citation."""
+def extract_pages(pdf_path, ocr_threshold=20):
+    """Extract text from each page of the PDF, keeping page numbers for citation.
+    Falls back to OCR (Tesseract) for pages with little/no embedded text —
+    i.e. scanned or image-only pages."""
     doc = fitz.open(pdf_path)
     pages = []
+    ocr_page_count = 0
     for i, page in enumerate(doc):
         text = page.get_text("text").strip()
+
+        if len(text) < ocr_threshold:
+            try:
+                pix = page.get_pixmap(dpi=200)
+                img = Image.open(io.BytesIO(pix.tobytes("png")))
+                ocr_text = pytesseract.image_to_string(img).strip()
+                if ocr_text:
+                    text = ocr_text
+                    ocr_page_count += 1
+            except Exception:
+                pass  # OCR unavailable or failed — keep whatever text we had
+
         if text:
             pages.append({"page": i + 1, "text": text})
     doc.close()
+    if ocr_page_count:
+        st.caption(f"OCR fallback used on {ocr_page_count} scanned/image page(s).")
     return pages
 
 
