@@ -1,0 +1,7 @@
+﻿*.pdf
+*.ipynb
+hld_analysis_exports/
+__pycache__/
+*.pyc
+.venv/
+venv/

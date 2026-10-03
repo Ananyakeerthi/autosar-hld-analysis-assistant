@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  autosar-hld-assistant:
+    build: .
+    container_name: autosar_hld_assistant
+    ports:
+      - "8501:8501"
+    environment:
+      # host.docker.internal lets the container reach Ollama running
+      # directly on your Windows/Mac host. On Linux hosts, Docker Desktop
+      # also supports this; on native Linux without Docker Desktop, replace
+      # this with your host machine's LAN IP instead.
+      - OLLAMA_HOST=http://host.docker.internal:11434
+      - OLLAMA_MODEL=llama3.2:latest
+    extra_hosts:
+      # Required on Linux so host.docker.internal resolves; harmless
+      # (ignored) on Docker Desktop for Windows/Mac where it's automatic.
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # Persist exported reports outside the container.
+      - ./hld_analysis_exports:/app/hld_analysis_exports
+    restart: unless-stopped
