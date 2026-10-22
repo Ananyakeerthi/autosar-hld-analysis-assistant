@@ -2,9 +2,11 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# System deps needed by PyMuPDF (fitz) and faiss
+# System deps needed by PyMuPDF (fitz), faiss, OCR and the healthcheck
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    curl \
+    tesseract-ocr \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
@@ -12,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app.py .
 
-# Where exports are written inside the container — mount a volume here
+# Where exports are written inside the container. Mount a volume here
 # so exported files survive container restarts (see docker-compose.yml).
 RUN mkdir -p /app/hld_analysis_exports
 

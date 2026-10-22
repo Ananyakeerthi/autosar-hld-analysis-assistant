@@ -4,3 +4,5 @@ sentence-transformers
 faiss-cpu
 numpy
 requests
+pytesseract
+pillow

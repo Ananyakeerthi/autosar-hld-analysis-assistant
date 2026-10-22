@@ -177,7 +177,6 @@ def ask(query, chunks, index, top_k=4):
     answer = call_llm(prompt)
     return answer, results
 
-
 def extract_architecture(query, chunks, index, top_k=4, force_pages=(79,)):
     results = retrieve(query, chunks, index, top_k=top_k)
 
@@ -194,7 +193,7 @@ Use ONLY the supplied document context.
 
 Extract architecture information explicitly present in the context.
 
-Respond with ONLY the four sections below — nothing before them, nothing
+Respond with ONLY the six sections below — nothing before them, nothing
 after them, and do not repeat these instructions or the word "RULES" in
 your answer.
 
@@ -204,6 +203,14 @@ COMPONENTS:
 
 INTERFACES:
 - <interface name> — Page <number>
+(or, if none are explicitly present: None found)
+
+PORTS:
+- <port name, e.g. P-Port or R-Port> — Page <number>
+(or, if none are explicitly present: None found)
+
+SIGNALS:
+- <signal name> — Page <number>
 (or, if none are explicitly present: None found)
 
 LAYERS:
@@ -222,6 +229,7 @@ Formatting rules you must silently follow (do not print this list):
 - Keep the terminology used in the document.
 - A service/function should NOT be classified as a component.
 - A layer should NOT be classified as a component.
+- A port (P-Port, R-Port, PR-Port) or signal name should NOT be classified as a component or interface.
 - Never write the literal word "Name" — always write the actual entity name.
 - Do not repeat the same finding twice within a section.
 
@@ -231,7 +239,7 @@ DOCUMENT CONTEXT:
 QUESTION:
 {query}
 
-Now write ONLY the four sections (COMPONENTS, INTERFACES, LAYERS, OTHER ENTITIES):
+Now write ONLY the six sections (COMPONENTS, INTERFACES, PORTS, SIGNALS, LAYERS, OTHER ENTITIES):
 """
     answer = call_llm(prompt)
     return answer, results
