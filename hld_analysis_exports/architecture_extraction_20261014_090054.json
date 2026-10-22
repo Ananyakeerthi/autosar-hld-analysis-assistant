@@ -1,0 +1,16 @@
+{
+  "label": "architecture_extraction",
+  "timestamp": "20261014_090054",
+  "metadata": {
+    "query": "Identify the architecture components, interfaces, layers and other entities explicitly shown or described in the document."
+  },
+  "content": "COMPONENTS:\n- Microcontroller Abstraction Layer — Page 29\n- AUTOSAR Software Components — Page 29\n- Actuator — Page 79\n- Sensor — Page 79\n- Basic Software — Page 79\n- Drivers — Page 79\n- Operating System — Page 79\n\nINTERFACES:\n- AUTOSAR Interface — Page 79\n- Standardized Interface — Page 79\n- Communication Standardized Interface — Page 79\n- Operating System Standardized Interface — Page 79\n- Basic Software Interface — Page 79\n- ECU Abstraction Standardized Interface — Page 79\n- Services Standardized Interface — Page 79\n- VFB & RTE Standardized Interface — Page 79\n\nLAYERS:\n- AUTOSAR Runtime Environment (RTE) — Page 29\n- Services Layer — Page 28\n- ECU Abstraction Layer — Page 28\n\nOTHER ENTITIES:\n- None found",
+  "sources": [
+    19,
+    18,
+    86,
+    111,
+    79,
+    79
+  ]
+}

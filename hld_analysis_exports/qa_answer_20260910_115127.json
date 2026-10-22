@@ -1,0 +1,15 @@
+{
+  "label": "qa_answer",
+  "timestamp": "20260910_115127",
+  "metadata": {
+    "query": "Summarize the main software components described in this document.",
+    "top_k": 4
+  },
+  "content": "According to the document context, the main software components described are:\n\n1. Application\n2. Actuator\n3. Sensor\n4. Basic Software\n5. Microcontroller\n6. Drivers\n7. Operating System (RTE)\n\nThese components are listed in the \"Components and interfaces view (simplified)\" on Page 78, ID 53.",
+  "sources": [
+    9,
+    5,
+    78,
+    72
+  ]
+}

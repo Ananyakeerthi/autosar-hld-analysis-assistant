@@ -1,0 +1,16 @@
+{
+  "label": "architecture_extraction",
+  "timestamp": "20260910_115535",
+  "metadata": {
+    "query": "Identify the architecture components, interfaces, layers and other entities explicitly shown or described in the document."
+  },
+  "content": "COMPONENTS:\n- Microcontroller Abstraction Layer — Page 94ju8\n- ECU Abstraction Layer — Page 94ju8\n- Application Layer — Page 94ju8\n- Microcontroller — Page 94ju8\n- NVRAM manager — Page 85\n- Error Manager — Page 85\n- Diagnostic Services — Page 17\n- ECU state management — Page 17\n- Mode management — Page 17\n- Wdg manager — Page 17\n\nINTERFACES:\n- Memory service modules — Page 85\n- Vehicle network communication and management services — Page 17\n- I/O signals — Page 17\n- NVRAM management — Page 85\n- UDS communication — Page 17\n- Error memory — Page 17\n- Fault treatment — Page 17\n- ECU state management — Page 17\n- Mode management — Page 17\n- Logical and temporal program flow monitoring — Page 17\n\nLAYERS:\n- Services Layer — Page 17\n- ECU Abstraction Layer — Page 17\n- Application Layer — Page 94ju8\n- Microcontroller Abstraction Layer — Page 94ju8\n- µC Abstraction Layer — Page 94ju8\n\nOTHER ENTITIES:\n- ECU Abstraction Layer — Page 94ju8\n- Application Layer — Page 94ju8\n- Microcontroller Abstraction Layer — Page 94ju8\n- µC Abstraction Layer — Page 94ju8",
+  "sources": [
+    17,
+    85,
+    17,
+    111,
+    79,
+    79
+  ]
+}
